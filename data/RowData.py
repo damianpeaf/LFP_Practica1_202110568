@@ -71,6 +71,7 @@ class RowData():
             })
 
     def setObligatorio(self, value):
+        print(value)
         validValues = [0, 1]
         dictionaryValues = [{
             'number': 1,

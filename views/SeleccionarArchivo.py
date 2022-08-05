@@ -35,19 +35,21 @@ class SeleccionarArchivo():
             text = file.read()
 
             Data.cleanData()
-            dataObject = Data(text)
+            Data(text)
             file.close()
 
-            if len(dataObject.warningMessagesList) > 0:
+            if len(Data.warningMessagesList) > 0:
                 messagebox.showwarning(
                     title="Advertencia", message=Data.warningMessages)
 
-            if len(dataObject.headerErrors) > 0 or len(dataObject.globalrowErrors) > 0:
+            if len(Data.headerErrors) > 0 or len(Data.globalrowErrors) > 0:
                 messagebox.showerror(
                     title="Error", message=Data.errorMessages)
             else:
                 messagebox.showinfo(
                     title="Informacion cargada", message="Informacion cargada")
+
+            Data.cleanErrors()
 
         except FileNotFoundError:
             messagebox.showwarning(

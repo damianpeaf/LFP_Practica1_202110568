@@ -6,34 +6,36 @@ class Data():
     errorMessages = ""
     warningMessages = ""
     data = []
+    headerErrors = []
+    globalrowErrors = []
+    warningMessagesList = []
 
     def __init__(self, textFromFile):
 
-        self.headerErrors = []
-        self.globalrowErrors = []
-        self.warningMessagesList = []
-
-        # * Recibe el texto en crudo
+        Data.headerErrors = []
+        Data.globalrowErrors = []
+        Data.warningMessagesList = []
 
         rowsInList = textFromFile.split("\n")
 
         rowNumber = 1
         for rowWithCommas in rowsInList:
-            row = self.createRow(rowWithCommas, rowNumber)
+            row = Data.createRow(rowWithCommas, rowNumber)
             if(row):
-                self.addRowToData(row)
+                Data.addRowToData(row)
             rowNumber += 1
 
-        self.generateErrorsAndWarning()
+        Data.generateErrorsAndWarning()
 
-    def addRowToData(self, newRow):
+    @staticmethod
+    def addRowToData(newRow):
         if len(newRow.errores['list']) > 0:
-            self.globalrowErrors.append(newRow.errores)
+            Data.globalrowErrors.append(newRow.errores)
         else:
             rowIndex = 0
             for rowInData in Data.data:
                 if rowInData.codigo == newRow.codigo:
-                    self.warningMessagesList.append(
+                    Data.warningMessagesList.append(
                         'Fila ' + str(rowIndex+1) + " sobreescrita por la fila " + str(newRow.rowNumber))
                     newRow.rowNumber = (rowIndex+1)
                     Data.data[rowIndex] = newRow
@@ -41,17 +43,20 @@ class Data():
                 rowIndex += 1
             Data.data.append(newRow)
 
-    def generateErrorsAndWarning(self):
+    @staticmethod
+    def generateErrorsAndWarning():
 
-        self.cleanErrors()
+        Data.errorMessages = ""
+        Data.warningMessages = ""
+
         Data.errorMessages += " Errores de Cabecera: \n\n"
 
-        for headerError in self.headerErrors:
+        for headerError in Data.headerErrors:
             Data.errorMessages += headerError['msg'] + "\n"
 
         Data.errorMessages += "\n\nErrores de filas: \n\n"
 
-        for rowError in self.globalrowErrors:
+        for rowError in Data.globalrowErrors:
             Data.errorMessages += "Errores en la fila: " + \
                 str(rowError['rowNumber']) + "\n"
             for rowErrorList in rowError['list']:
@@ -60,21 +65,25 @@ class Data():
                     "--Mensaje: " + rowErrorList['msg'] + "\n\n"
 
         Data.warningMessages += "Advertencias: \n\n"
-        for waringMessage in self.warningMessagesList:
+        for waringMessage in Data.warningMessagesList:
             Data.warningMessages += waringMessage + "\n"
 
-    def cleanErrors(self):
+    @staticmethod
+    def cleanErrors():
         Data.errorMessages = ""
         Data.warningMessages = ""
+        Data.headerErrors = []
+        Data.globalrowErrors = []
+        Data.warningMessagesList = []
 
     @staticmethod
     def cleanData():
         Data.data = []
 
-    def createRow(self, rowWithCommas, rowNumber):
+    @staticmethod
+    def createRow(rowWithCommas, rowNumber):
         row = rowWithCommas.split(',')
         try:
-            # self, rowNumber, codigo, nombre, prerrequisitos, obligatorio, semestre, creditos, estado
             codigo = row[0]
             nombre = row[1]
             prerrequisitos = row[2]
@@ -86,7 +95,7 @@ class Data():
             return RowData(rowNumber, codigo, nombre, prerrequisitos, obligatorio, semestre, creditos, estado)
 
         except IndexError:
-            self.headerErrors.append({
+            Data.headerErrors.append({
                 'rowNumber': rowNumber,
                 'msg': 'Hace falta un dato en la fila ' + str(rowNumber)
             })

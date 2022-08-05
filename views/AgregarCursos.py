@@ -1,4 +1,7 @@
 from tkinter import *
+from tkinter import messagebox
+
+from data.Data import Data
 
 
 class AgregarCursos():
@@ -18,8 +21,26 @@ class AgregarCursos():
         creditos = self.creditosEntry.get()
         estado = self.estadoEntry.get()
 
-        rowAsText = codigo + ","+nombre+","+prerrequisito+"," + \
-            semestre+","+opcionalidad+","+creditos+","+estado
+        rowWithCommas = codigo + ","+nombre+","+prerrequisito + \
+            "," + opcionalidad+","+semestre+","+creditos+","+estado
+
+        newRow = Data.createRow(rowWithCommas, len(Data.data)+1)
+
+        if newRow:
+            Data.addRowToData(newRow)
+        Data.generateErrorsAndWarning()
+
+        if len(Data.warningMessagesList) > 0:
+            messagebox.showwarning(title="Advertencia",
+                                   message=Data.warningMessages)
+
+        if len(Data.headerErrors) > 0 or len(Data.globalrowErrors) > 0:
+            messagebox.showerror(title="Error", message=Data.errorMessages)
+        else:
+            messagebox.showinfo(title="Informacion cargada",
+                                message="Informacion cargada")
+
+        Data.cleanErrors()
 
     def initUI(self):
         Label(self.window, text="Codigo").grid(column=0, row=0)

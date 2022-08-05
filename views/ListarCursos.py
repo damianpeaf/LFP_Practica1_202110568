@@ -44,7 +44,6 @@ class ListarCursos():
 
     def loadData(self):
         for row in Data.data:
-            print(row.errores)
             codigo = str(row.codigo)
             nombre = row.nombre
 
