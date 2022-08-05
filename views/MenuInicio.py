@@ -23,9 +23,6 @@ class MenuInicio():
         newWindow = SeleccionarArchivo(self.masterWindow)
         newWindow.window.grab_set()
 
-    def prueba(self):
-        print(Data.data)
-
     def initUI(self):
 
         titleFont = ("Helvetica", 12, "bold")

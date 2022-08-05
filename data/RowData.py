@@ -3,18 +3,15 @@
 class RowData():
 
     # ? Error de la forma { line: 0, errores[]}
-    # errores = {
-    #     'rowNumber': None,
-    #     'list': []
-    # }
-    # codigo = None
-    # nombre = None
-    # prerrequisitos = []
-    # obligatorio = None
-    # semestre = None
-    # creditos = None
-    # estado = None
-    # rowNumber = None
+    errores = None
+    codigo = None
+    nombre = None
+    prerrequisitos = []
+    obligatorio = None
+    semestre = None
+    creditos = None
+    estado = None
+    rowNumber = None
 
     def __init__(self, rowNumber, codigo, nombre, prerrequisitos, obligatorio, semestre, creditos, estado):
 
@@ -60,11 +57,13 @@ class RowData():
                 self.prerrequisitos = None
                 return
 
+            self.prerrequisitos = []
             values = str(values).split(";")
+
             for value in values:
                 posicion += 1
                 self.prerrequisitos.append(int(value))
-        except:
+        except Exception as e:
             self.errores['list'].append({
                 'param': 'prerrequisitos',
                 'msg': 'El prerrequisito debe ser un numero',
@@ -141,7 +140,9 @@ class RowData():
             else:
                 for dict in dictionaryValues:
                     if dict['number'] == posibleValue:
-                        self.obligatorio = dict
+                        self.estado = dict
+                        return
+
         except ValueError:
             self.errores['list'].append({
                 'param': 'estado',

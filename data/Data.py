@@ -3,10 +3,6 @@ from data.RowData import RowData
 
 
 class Data():
-
-    headerErrors = []
-    globalrowErrors = []
-    warningMessagesList = []
     errorMessages = ""
     warningMessages = ""
     data = []
@@ -62,12 +58,10 @@ class Data():
                 Data.errorMessages += "-parametro: " + \
                     rowErrorList['param'] + "\n" + \
                     "--Mensaje: " + rowErrorList['msg'] + "\n\n"
-        # print(Data.errorMessages)
 
         Data.warningMessages += "Advertencias: \n\n"
         for waringMessage in self.warningMessagesList:
             Data.warningMessages += waringMessage + "\n"
-        # print(Data.warningMessages)
 
     def cleanErrors(self):
         Data.errorMessages = ""

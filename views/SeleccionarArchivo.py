@@ -36,7 +36,7 @@ class SeleccionarArchivo():
 
             Data.cleanData()
             dataObject = Data(text)
-            # print(Data.warningMessages)
+            file.close()
 
             if len(dataObject.warningMessagesList) > 0:
                 messagebox.showwarning(
