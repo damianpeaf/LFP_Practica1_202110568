@@ -77,6 +77,30 @@ class Data():
         Data.warningMessagesList = []
 
     @staticmethod
+    def searchByCode(codigo):
+
+        response = {
+            'row': None,
+            'error': 'No se encontró el curso'
+        }
+
+        for row in Data.data:
+            if row.codigo == int(codigo):
+                response['row'] = row
+                break
+
+        return response
+
+    @staticmethod
+    def deleteByCode(codigo):
+        for row in Data.data:
+            if row.codigo == int(codigo):
+                Data.data.remove(row)
+                return True
+
+        return False
+
+    @staticmethod
     def cleanData():
         Data.data = []
 

@@ -71,7 +71,6 @@ class RowData():
             })
 
     def setObligatorio(self, value):
-        print(value)
         validValues = [0, 1]
         dictionaryValues = [{
             'number': 1,
@@ -149,3 +148,18 @@ class RowData():
                 'param': 'estado',
                 'msg': 'El estado obligatorio debe ser un entero',
             })
+
+    def updateRow(self, nombre, prerrequisitos, obligatorio, semestre, creditos, estado):
+        self.errores = {
+            'rowNumber': None,
+            'list': []
+        }
+
+        self.setNombre(nombre)
+        self.setPrerrequisitos(prerrequisitos)
+        self.setObligatorio(obligatorio)
+        self.setSemestre(semestre)
+        self.setCreditos(creditos)
+        self.setEstado(estado)
+
+        return self.errores['list']
