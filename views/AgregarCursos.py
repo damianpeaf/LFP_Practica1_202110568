@@ -9,7 +9,7 @@ class AgregarCursos():
     def __init__(self, parent):
         self.window = Toplevel(parent)
         self.window.geometry("400x240")
-        self.window.title("Gestionar Cursos")
+        self.window.title("Agregar Cursos")
         self.initUI()
 
     def sendForm(self):

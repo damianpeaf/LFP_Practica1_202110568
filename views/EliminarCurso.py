@@ -9,7 +9,7 @@ class EliminarCurso():
     def __init__(self, parent):
         self.window = Toplevel(parent)
         self.window.geometry("400x240")
-        self.window.title("Gestionar Cursos")
+        self.window.title("Eliminar Cursos")
         self.initUI()
 
     def deleteRow(self):

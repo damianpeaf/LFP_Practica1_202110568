@@ -9,7 +9,7 @@ class EditarCursos():
     def __init__(self, parent):
         self.window = Toplevel(parent)
         self.window.geometry("400x240")
-        self.window.title("Gestionar Cursos")
+        self.window.title("Editar Cursos")
         self.initUI()
 
     def editRow(self):
