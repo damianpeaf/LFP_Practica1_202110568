@@ -1,25 +1,9 @@
-
-
 class RowData():
 
-    # ? Error de la forma { line: 0, errores[]}
-    errores = None
-    codigo = None
-    nombre = None
-    prerrequisitos = []
-    obligatorio = None
-    semestre = None
-    creditos = None
-    estado = None
-    rowNumber = None
+    def __init__(self, rowNumber, codigo, nombre, prerrequisitos, obligatorio,
+                 semestre, creditos, estado):
 
-    def __init__(self, rowNumber, codigo, nombre, prerrequisitos, obligatorio, semestre, creditos, estado):
-
-        self.errores = {
-            'rowNumber': None,
-            'list': []
-        }
-
+        self.errores = {'rowNumber': None, 'list': []}
         self.rowNumber = rowNumber
         self.errores['rowNumber'] = self.rowNumber
         self.setCodigo(codigo)
@@ -45,15 +29,17 @@ class RowData():
             self.nombre = str(value)
         except ValueError:
             self.errores['list'].append({
-                'param': 'nombre',
-                'msg': 'El nombre debe ser una cadena de text',
+                'param':
+                'nombre',
+                'msg':
+                'El nombre debe ser una cadena de text',
             })
 
     def setPrerrequisitos(self, values):
         posicion = 0
         try:
 
-            if(str(values).strip() == ""):
+            if (str(values).strip() == ""):
                 self.prerrequisitos = None
                 return
 
@@ -84,8 +70,11 @@ class RowData():
 
             if posibleValue not in validValues:
                 self.errores['list'].append({
-                    'param': 'obligatorio',
-                    'msg': 'El parametro obligatorio debe estar contenido dentro de los valores ' + ' o '.join(str(e) for e in validValues),
+                    'param':
+                    'obligatorio',
+                    'msg':
+                    'El parametro obligatorio debe estar contenido dentro de los valores '
+                    + ' o '.join(str(e) for e in validValues),
                 })
             else:
                 for dict in dictionaryValues:
@@ -93,9 +82,10 @@ class RowData():
                         self.obligatorio = dict
         except ValueError:
             self.errores['list'].append({
-                'param': 'obligatorio',
-                'msg': 'El parametro obligatorio debe ser un entero',
-
+                'param':
+                'obligatorio',
+                'msg':
+                'El parametro obligatorio debe ser un entero',
             })
 
     def setSemestre(self, value):
@@ -103,9 +93,10 @@ class RowData():
             self.semestre = int(value)
         except ValueError:
             self.errores['list'].append({
-                'param': 'semestre',
-                'msg': 'El semestre debe ser un entero',
-
+                'param':
+                'semestre',
+                'msg':
+                'El semestre debe ser un entero',
             })
 
     def setCreditos(self, value):
@@ -113,8 +104,10 @@ class RowData():
             self.creditos = int(value)
         except ValueError:
             self.errores['list'].append({
-                'param': 'creditos',
-                'msg': 'Los creditos deben de un numero entero',
+                'param':
+                'creditos',
+                'msg':
+                'Los creditos deben de un numero entero',
             })
 
     def setEstado(self, value):
@@ -134,8 +127,11 @@ class RowData():
 
             if posibleValue not in validValues:
                 self.errores['list'].append({
-                    'param': 'estado',
-                    'msg': 'El parametro estado debe estar contenido dentro de los valores ' + ' o '.join(str(e) for e in validValues),
+                    'param':
+                    'estado',
+                    'msg':
+                    'El parametro estado debe estar contenido dentro de los valores '
+                    + ' o '.join(str(e) for e in validValues),
                 })
             else:
                 for dict in dictionaryValues:
@@ -145,15 +141,15 @@ class RowData():
 
         except ValueError:
             self.errores['list'].append({
-                'param': 'estado',
-                'msg': 'El estado obligatorio debe ser un entero',
+                'param':
+                'estado',
+                'msg':
+                'El estado obligatorio debe ser un entero',
             })
 
-    def updateRow(self, nombre, prerrequisitos, obligatorio, semestre, creditos, estado):
-        self.errores = {
-            'rowNumber': None,
-            'list': []
-        }
+    def updateRow(self, nombre, prerrequisitos, obligatorio, semestre,
+                  creditos, estado):
+        self.errores = {'rowNumber': None, 'list': []}
 
         self.setNombre(nombre)
         self.setPrerrequisitos(prerrequisitos)

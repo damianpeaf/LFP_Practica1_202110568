@@ -1,4 +1,3 @@
-
 from data.RowData import RowData
 
 
@@ -20,8 +19,12 @@ class Data():
 
         rowNumber = 1
         for rowWithCommas in rowsInList:
+            rowWithCommas = rowWithCommas.strip()
+            if rowWithCommas == "":
+                continue
+
             row = Data.createRow(rowWithCommas, rowNumber)
-            if(row):
+            if (row):
                 Data.addRowToData(row)
             rowNumber += 1
 
@@ -36,8 +39,9 @@ class Data():
             for rowInData in Data.data:
                 if rowInData.codigo == newRow.codigo:
                     Data.warningMessagesList.append(
-                        'Fila ' + str(rowIndex+1) + " sobreescrita por la fila " + str(newRow.rowNumber))
-                    newRow.rowNumber = (rowIndex+1)
+                        'Fila ' + str(rowIndex + 1) +
+                        " sobreescrita por la fila " + str(newRow.rowNumber))
+                    newRow.rowNumber = (rowIndex + 1)
                     Data.data[rowIndex] = newRow
                     return
                 rowIndex += 1
@@ -79,15 +83,16 @@ class Data():
     @staticmethod
     def searchByCode(codigo):
 
-        response = {
-            'row': None,
-            'error': 'No se encontró el curso'
-        }
+        response = {'row': None, 'error': 'No se encontró el curso'}
 
-        for row in Data.data:
-            if row.codigo == int(codigo):
-                response['row'] = row
-                break
+        try:
+
+            for row in Data.data:
+                if row.codigo == int(codigo):
+                    response['row'] = row
+                    break
+        except:
+            pass
 
         return response
 
@@ -116,11 +121,14 @@ class Data():
             creditos = row[5]
             estado = row[6]
 
-            return RowData(rowNumber, codigo, nombre, prerrequisitos, obligatorio, semestre, creditos, estado)
+            return RowData(rowNumber, codigo, nombre, prerrequisitos,
+                           obligatorio, semestre, creditos, estado)
 
         except IndexError:
             Data.headerErrors.append({
-                'rowNumber': rowNumber,
-                'msg': 'Hace falta un dato en la fila ' + str(rowNumber)
+                'rowNumber':
+                rowNumber,
+                'msg':
+                'Hace falta un dato en la fila ' + str(rowNumber)
             })
             return None

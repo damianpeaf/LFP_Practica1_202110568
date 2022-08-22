@@ -8,8 +8,9 @@ class EditarCursos():
 
     def __init__(self, parent):
         self.window = Toplevel(parent)
-        self.window.geometry("400x240")
+        self.window.geometry("240x240")
         self.window.title("Editar Cursos")
+        self.window.config(bg='#1B1F3B')
         self.initUI()
 
     def editRow(self):
@@ -25,8 +26,8 @@ class EditarCursos():
         creditos = self.creditosEntry.get()
         estado = self.estadoEntry.get()
 
-        errores = self.rowToEdit.updateRow(
-            nombre, prerrequisito, opcionalidad, semestre, creditos, estado)
+        errores = self.rowToEdit.updateRow(nombre, prerrequisito, opcionalidad,
+                                           semestre, creditos, estado)
 
         if len(errores) == 0:
             messagebox.showinfo(title="Informacion Actualizada ",
@@ -36,7 +37,7 @@ class EditarCursos():
         errorMsg = ""
         errorMsg += "No se han modificado los siguientes parametros\n\n"
         for error in errores:
-            errorMsg += error['param'] + " : " + error['msg']+"\n"
+            errorMsg += error['param'] + " : " + error['msg'] + "\n"
 
         messagebox.showwarning(title="Advertencia", message=errorMsg)
 
@@ -85,44 +86,64 @@ class EditarCursos():
 
         self.rowToEdit = None
 
-        Label(self.window, text="Codigo").grid(column=0, row=0)
+        Label(self.window, text="Codigo", bg='#1B1F3B',
+              fg="white").grid(column=0, row=0)
         self.codigoEntry = Entry(self.window)
         self.codigoEntry.grid(column=1, row=0)
 
-        Label(self.window, text="Nombre").grid(column=0, row=1)
+        Label(self.window, text="Nombre", bg='#1B1F3B',
+              fg="white").grid(column=0, row=1)
         self.nombreEntry = Entry(self.window)
         self.nombreEntry.grid(column=1, row=1)
 
-        Label(self.window, text="prerrequisito").grid(column=0, row=2)
+        Label(self.window, text="prerrequisito", bg='#1B1F3B',
+              fg="white").grid(column=0, row=2)
         self.prerrequisitoEntry = Entry(self.window)
         self.prerrequisitoEntry.grid(column=1, row=2)
 
-        Label(self.window, text="semestre").grid(column=0, row=3)
+        Label(self.window, text="semestre", bg='#1B1F3B',
+              fg="white").grid(column=0, row=3)
         self.semestreEntry = Entry(self.window)
         self.semestreEntry.grid(column=1, row=3)
 
-        Label(self.window, text="opcionalidad").grid(column=0, row=4)
+        Label(self.window, text="opcionalidad", bg='#1B1F3B',
+              fg="white").grid(column=0, row=4)
         self.opcionalidadEntry = Entry(self.window)
         self.opcionalidadEntry.grid(column=1, row=4)
 
-        Label(self.window, text="creditos").grid(column=0, row=5)
+        Label(self.window, text="creditos", bg='#1B1F3B',
+              fg="white").grid(column=0, row=5)
         self.creditosEntry = Entry(self.window)
         self.creditosEntry.grid(column=1, row=5)
 
-        Label(self.window, text="estado").grid(column=0, row=6)
+        Label(self.window, text="estado", bg='#1B1F3B',
+              fg="white").grid(column=0, row=6)
         self.estadoEntry = Entry(self.window)
         self.estadoEntry.grid(column=1, row=6)
 
-        Button(self.window, text="Editar Cursos", pady=5,
-               padx=10, bg="#FFC107", command=self.editRow).grid(column=0, row=7)
+        Button(self.window,
+               text="Editar Cursos",
+               pady=5,
+               padx=10,
+               bg="#FFC107",
+               command=self.editRow).grid(column=0, row=7)
 
-        Button(self.window, text="Regresar", pady=5, padx=10, bg="#0D6EFD",
+        Button(self.window,
+               text="Regresar",
+               pady=5,
+               padx=10,
+               bg="#0D6EFD",
                command=self.window.destroy).grid(column=1, row=7)
 
-        Label(self.window, text="Codigo").grid(column=0, row=8)
+        Label(self.window, text="Codigo", bg='#1B1F3B',
+              fg="white").grid(column=0, row=8)
 
         self.searchCodigoEntry = Entry(self.window)
         self.searchCodigoEntry.grid(column=1, row=8)
 
-        Button(self.window, text="Buscar", pady=5,
-               padx=10, bg="#0DCAF0", command=self.handleSearch).grid(column=1, row=9)
+        Button(self.window,
+               text="Buscar",
+               pady=5,
+               padx=10,
+               bg="#0DCAF0",
+               command=self.handleSearch).grid(column=1, row=9)

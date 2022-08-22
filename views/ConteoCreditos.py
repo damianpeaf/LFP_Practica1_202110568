@@ -9,6 +9,7 @@ class ConteoCreditos():
     def __init__(self, parent):
         self.window = Toplevel(parent)
         self.window.geometry("450x290")
+        self.window.config(bg='#1B1F3B')
         self.window.title("Conteo de creditos")
         self.initUI()
 
@@ -52,21 +53,26 @@ class ConteoCreditos():
         self.totalCreditosCursando.insert(0, str(generalCredits['cursando']))
 
         self.totalCreditosPendientes.delete(0, END)
-        self.totalCreditosPendientes.insert(
-            0, str(generalCredits['pendientes']))
+        self.totalCreditosPendientes.insert(0,
+                                            str(generalCredits['pendientes']))
 
     def initUI(self):
 
         # * Generales
-        Label(self.window, text="Creditos aprobados").grid(column=0, row=0)
+        Label(self.window, text="Creditos aprobados", bg='#1B1F3B',
+              fg='white').grid(column=0, row=0)
         self.totalCreditosAprobados = Entry(self.window)
         self.totalCreditosAprobados.grid(column=1, row=0)
 
-        Label(self.window, text="Creditos cursando").grid(column=0, row=1)
+        Label(self.window, text="Creditos cursando", bg='#1B1F3B',
+              fg='white').grid(column=0, row=1)
         self.totalCreditosCursando = Entry(self.window)
         self.totalCreditosCursando.grid(column=1, row=1)
 
-        Label(self.window, text="Creditos pendientes").grid(column=0, row=2)
+        Label(self.window,
+              text="Creditos pendientes",
+              bg='#1B1F3B',
+              fg='white').grid(column=0, row=2)
         self.totalCreditosPendientes = Entry(self.window)
         self.totalCreditosPendientes.grid(column=1, row=2)
 
@@ -75,31 +81,52 @@ class ConteoCreditos():
         # * Conteo personalizado
 
         # * Hasta semestre N
-        Label(self.window, text="Creditos obligatorios hasta semestre N: ").grid(
-            column=0, row=3)
+        Label(self.window,
+              text="Creditos obligatorios hasta semestre N: ",
+              bg='#1B1F3B',
+              fg='white').grid(column=0, row=3)
         self.creditosObligatoriosHastaN = Entry(self.window)
         self.creditosObligatoriosHastaN.grid(column=1, row=3)
 
         # * Controles
-        Label(self.window, text="Semestre").grid(column=0, row=4)
+        Label(self.window, text="Semestre", bg='#1B1F3B',
+              fg='white').grid(column=0, row=4)
         self.hastaSemestreNSpinbox = Spinbox(self.window, from_=1, to=10)
         self.hastaSemestreNSpinbox.grid(column=1, row=4)
-        Button(self.window, text="Contar", pady=5, padx=10,
-               bg="#0D6EFD", fg="white", command=self.countToN).grid(column=2, row=4)
+        Button(self.window,
+               text="Contar",
+               pady=5,
+               padx=10,
+               bg="#0D6EFD",
+               fg="white",
+               command=self.countToN).grid(column=2, row=4)
 
         # * De semestre especifico
-        Label(self.window, text="Creditos del semestre: ").grid(
-            column=0, row=5)
+        Label(self.window,
+              text="Creditos del semestre: ",
+              bg='#1B1F3B',
+              fg='white').grid(column=0, row=5)
         self.totalCreditosDeSemestre = Entry(self.window)
         self.totalCreditosDeSemestre.grid(column=1, row=5)
 
         # * Controles
-        Label(self.window, text="Semestre").grid(column=0, row=6)
+        Label(self.window, text="Semestre", bg='#1B1F3B',
+              fg='white').grid(column=0, row=6)
         self.semestreNSpinBox = Spinbox(self.window, from_=1, to=10)
         self.semestreNSpinBox.grid(column=1, row=6)
-        Button(self.window, text="Contar",  pady=5, padx=10,
-               bg="#0D6EFD", fg="white", command=self.countOfN).grid(column=2, row=6)
+        Button(self.window,
+               text="Contar",
+               pady=5,
+               padx=10,
+               bg="#0D6EFD",
+               fg="white",
+               command=self.countOfN).grid(column=2, row=6)
 
         # * Regresar
-        Button(self.window, text="Regresar",
-               pady=5, padx=10, bg="#DC3545", fg="white", command=self.window.destroy).grid(column=2, row=7)
+        Button(self.window,
+               text="Regresar",
+               pady=5,
+               padx=10,
+               bg="#DC3545",
+               fg="white",
+               command=self.window.destroy).grid(column=2, row=7)

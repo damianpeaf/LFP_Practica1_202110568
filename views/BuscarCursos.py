@@ -4,29 +4,14 @@ from tkinter import messagebox
 from data.Data import Data
 
 
-class EliminarCurso():
+class BuscarCurso():
 
     def __init__(self, parent):
         self.window = Toplevel(parent)
         self.window.geometry("240x240")
         self.window.config(bg='#1B1F3B')
-        self.window.title("Eliminar Cursos")
+        self.window.title("Buscar Curso")
         self.initUI()
-
-    def deleteRow(self):
-        if not self.rowToDelete:
-            messagebox.showwarning(title="Advertencia",
-                                   message="No se ha buscado un curso valido")
-            return
-
-        deleted = Data.deleteByCode(self.rowToDelete.codigo)
-
-        if deleted:
-            messagebox.showinfo(title="Aviso", message="Curso eliminado")
-
-        else:
-            messagebox.showwarning(title="Advertencia",
-                                   message="Hubo un error")
 
     def handleSearch(self):
 
@@ -34,7 +19,7 @@ class EliminarCurso():
         results = Data.searchByCode(codigo)
 
         if not results['row']:
-            self.rowToDelete = None
+            self.rowToEdit = None
             self.codigoEntry.delete(0, END)
             self.codigoEntry.insert(0, "")
             messagebox.showwarning(title="Advertencia",
@@ -42,7 +27,7 @@ class EliminarCurso():
             return
 
         row = results['row']
-        self.rowToDelete = row
+        self.rowToEdit = row
 
         prerrequisitos = ""
         if row.prerrequisitos:
@@ -71,7 +56,7 @@ class EliminarCurso():
 
     def initUI(self):
 
-        self.rowToDelete = None
+        self.rowToEdit = None
 
         Label(self.window, text="Codigo", bg='#1B1F3B',
               fg="white").grid(column=0, row=0)
@@ -107,13 +92,6 @@ class EliminarCurso():
               fg="white").grid(column=0, row=6)
         self.estadoEntry = Entry(self.window)
         self.estadoEntry.grid(column=1, row=6)
-
-        Button(self.window,
-               text="Eliminar",
-               pady=5,
-               padx=10,
-               bg="#DC3545",
-               command=self.deleteRow).grid(column=0, row=7)
 
         Button(self.window,
                text="Regresar",

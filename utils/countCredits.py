@@ -1,4 +1,3 @@
-
 from data.Data import Data
 
 
@@ -10,9 +9,10 @@ def countGeneralCredits():
     for row in Data.data:
 
         estado = row.estado['number']
+        opcionalidad = row.obligatorio['number']
         creditos = row.creditos
 
-        if estado == -1:
+        if estado == -1 and opcionalidad == 1:
             pendientes += creditos
         elif estado == 1:
             cursando += creditos
@@ -28,10 +28,13 @@ def countGeneralCredits():
 
 def countObligatoryCreditsToN(semesterNumber):
     creditos = 0
-    for row in Data.data:
-        if row.semestre <= int(semesterNumber):
-            if row.obligatorio['number'] == 1:
-                creditos += row.creditos
+    try:
+        for row in Data.data:
+            if row.semestre <= int(semesterNumber):
+                if row.obligatorio['number'] == 1:
+                    creditos += row.creditos
+    except:
+        pass
 
     return creditos
 
@@ -39,8 +42,11 @@ def countObligatoryCreditsToN(semesterNumber):
 def countAllCreditsOfN(semesterNumber):
     creditos = 0
 
-    for row in Data.data:
-        if row.semestre == int(semesterNumber):
-            creditos += row.creditos
+    try:
+        for row in Data.data:
+            if row.semestre == int(semesterNumber):
+                creditos += row.creditos
+    except:
+        pass
 
     return creditos

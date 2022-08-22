@@ -1,5 +1,6 @@
 from tkinter import *
 from views.AgregarCursos import AgregarCursos
+from .BuscarCursos import BuscarCurso
 from views.EditarCursos import EditarCursos
 from views.EliminarCurso import EliminarCurso
 from views.ListarCursos import ListarCursos
@@ -11,8 +12,9 @@ class GestionarCurso():
 
     def __init__(self, parent):
         self.window = Toplevel(parent)
-        self.window.geometry("400x250")
+        self.window.geometry("400x300")
         self.window.title("Gestionar Cursos")
+        self.window.config(bg='#1B1F3B')
         self.initUI()
 
     def goToListarCursos(self):
@@ -31,25 +33,72 @@ class GestionarCurso():
         newWindow = EliminarCurso(self.window)
         newWindow.window.grab_set()
 
+    def goToBuscarCursos(self):
+        newWindow = BuscarCurso(self.window)
+        newWindow.window.grab_set()
+
     def initUI(self):
 
         buttonFont = ("Helvetica", 12, "bold")
         titleFont = ("Helvetica", 16, "bold")
 
-        Label(self.window, text="Opciones:",
-              pady=5, font=titleFont).pack(expand=1, fill=BOTH)
+        Label(self.window,
+              text="Opciones:",
+              pady=5,
+              font=titleFont,
+              bg='#1B1F3B',
+              fg='white').pack(expand=1, fill=BOTH)
 
-        Button(self.window, text="Listar cursos",
-               pady=5, padx=10, bg="#0DCAF0", fg="white", font=buttonFont, command=self.goToListarCursos).pack(expand=1, fill=BOTH)
+        Button(self.window,
+               text="Listar cursos",
+               pady=5,
+               padx=10,
+               bg="#0DCAF0",
+               fg="white",
+               font=buttonFont,
+               command=self.goToListarCursos).pack(expand=1, fill=BOTH)
 
-        Button(self.window, text="Agregar cursos",
-               pady=5, padx=10, bg="#198754", fg="white", font=buttonFont, command=self.goToAgregarCursos).pack(expand=1, fill=BOTH)
+        Button(self.window,
+               text="Buscar cursos",
+               pady=5,
+               padx=10,
+               bg="#0DCAF0",
+               fg="white",
+               font=buttonFont,
+               command=self.goToBuscarCursos).pack(expand=1, fill=BOTH)
 
-        Button(self.window, text="Editar cursos",
-               pady=5, padx=10, bg="#FFC107", fg="white", font=buttonFont, command=self.goToEditarCursos).pack(expand=1, fill=BOTH)
+        Button(self.window,
+               text="Agregar cursos",
+               pady=5,
+               padx=10,
+               bg="#198754",
+               fg="white",
+               font=buttonFont,
+               command=self.goToAgregarCursos).pack(expand=1, fill=BOTH)
 
-        Button(self.window, text="Eliminar cursos",
-               pady=5, padx=10, bg="#DC3545", fg="white", font=buttonFont, command=self.goToEliminarCursos).pack(expand=1, fill=BOTH)
+        Button(self.window,
+               text="Editar cursos",
+               pady=5,
+               padx=10,
+               bg="#FFC107",
+               fg="white",
+               font=buttonFont,
+               command=self.goToEditarCursos).pack(expand=1, fill=BOTH)
 
-        Button(self.window, text="Regresar a menu principal",
-               pady=5, padx=10, bg="#0D6EFD", fg="white", font=buttonFont, command=self.window.destroy).pack(expand=1, fill=BOTH)
+        Button(self.window,
+               text="Eliminar cursos",
+               pady=5,
+               padx=10,
+               bg="#DC3545",
+               fg="white",
+               font=buttonFont,
+               command=self.goToEliminarCursos).pack(expand=1, fill=BOTH)
+
+        Button(self.window,
+               text="Regresar a menu principal",
+               pady=5,
+               padx=10,
+               bg="#0D6EFD",
+               fg="white",
+               font=buttonFont,
+               command=self.window.destroy).pack(expand=1, fill=BOTH)
